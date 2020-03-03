@@ -1,0 +1,126 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+body{
+    background-color: #2e2e2e;
+    font-family: 'Montserrat';
+    display: grid;
+    justify-content: center;
+}
+
+header{
+    background-color: #003f5c;
+    text-align: center;
+    color: white;
+    max-height: 150px;
+}
+
+
+
+header figure img{
+    max-height: 100px;
+    max-width: 80%;
+}
+
+#welkom, #tijd{
+    text-align: center;
+    width: 90%;
+    margin: auto;
+    border-radius: 8px;
+    display: inline-block;
+    color: white;
+    margin-top: 15px;
+}
+
+#welkom{
+    background-color: #58508d;
+}
+
+#welkom p{
+    padding: 5px;
+}
+
+#tijd{
+    background-color: #bc5090;
+}
+
+
+#container{
+    display: grid;
+}
+
+.data{
+    width: 90%;
+    margin: auto;
+    text-align: center;
+}
+
+.informatie{
+    display: inline-block;
+    text-align: center;
+    background-color: #ffa600;
+    color: white;
+    border-radius: 8px;
+    font-size: 14px;
+    padding: 5px;
+    margin-bottom: 15px;
+    margin-top: 15px;
+}
+
+.grafiek{
+    background-color: #374c80;
+    border-radius: 8px;
+}
+
+footer{
+    background-color: #003f5c;
+    text-align: center;
+    color: white;
+    position: absolute;
+    bottom: 0px;
+    width: 100%;
+}
+
+@media (min-width: 600px) {
+    #welkom{
+        width: 75%;
+    }
+    
+    #tijd{
+        width: 50%;
+    }
+    
+    .informatie{
+        width: 75%;
+    }
+
+
+@media (min-width: 1000px) {
+    #container{
+        grid-template-columns: 50% 50%;
+    }
+    #welkom{
+        width: 50%;
+    }
+    
+    #tijd{
+        width: 30%;
+    }    
+    
+}
+    
+@media (min-width: 1600px) {
+    #container{
+        grid-template-columns: 25% 25% 25% 25%;
+    }
+    
+    #welkom{
+        width: 30%;
+    }
+    
+    #tijd{
+        width: 20%;
+    }    
+}
