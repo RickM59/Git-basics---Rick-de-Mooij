@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html>
+    <head lang="nl">
+
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.js"></script>
+
+        <title>Raketje voor Musk</title>
+        <link rel="stylesheet" href="Raket.css" type="text/css">
+
+    </head>
+    
+    <body>
+        <header>
+        
+            <figure>
+                <img src="images/spacex_logo_white.png" alt="Space X logo">
+            </figure>
+            
+        </header>
+        
+        <section id="welkom">
+        
+            <p>Welkom aan boord van deze vlucht naar mars! Onderin vindt u een aantal belangrijke stukjes informatie die wat vertellen over onze reis. Meneer Musk wenst u een prettige vlucht!</p>
+            
+        </section>
+        
+        
+        <section id="tijd">
+            
+            <h3>De verwachte aankomsttijd is:</h3>
+            <h2 id="aankomstTijd"></h2>
+        
+        </section>
+        
+        <div id="container">
+        
+            <section id="afstand" class="data">
+
+                <h2 class="informatie">De reis naar Mars is niet zomaar afgelegd, hieronder ziet u hoeveel kilometer wij nog te gaan hebben voor onze reis naar Mars:</h2>
+
+                <canvas id="afstandTotMars" class="grafiek"></canvas>
+
+            </section>
+
+            <section id="brandstof" class="data">
+
+                <h2 class="informatie">Er is nogal wat brandstof nodig om op onze bestemming aan te komen, hieronder ziet u ons dagelijks verbruik: </h2>
+
+                <canvas id="brandstofPerDag" class="grafiek"></canvas>
+
+            </section>
+
+            <section id="zwaartekracht" class="data">
+
+                <h2 class="informatie">De zwaartekracht op Mars werkt net wat anders dan de zwaartekracht op aarde, hieronder ziet u een overzicht van de zwaartekracht in ons zonnenstelsel.</h2>
+
+                <canvas id="zwaartekrachtZonnenstelsel" class="grafiek"></canvas>
+
+            </section>
+
+            <section id="voedsel" class="data">
+
+                <h2 class="informatie"> Om u te voorzien van alle gerechten die u ook op aarde eet, heeft SpaceX van alles aan boord gehaald om u vlucht zo comfortabel mogelijk te maken!</h2>
+
+                <canvas id="voedselAanBoord" class="grafiek"></canvas>
+
+            </section>
+            
+        </div>
+
+        
+        <script>
+        
+            var aftelDatum = new Date("Feb 4, 2021 09:30:00").getTime();
+
+            var tijd = setInterval(function() {
+
+                var vandaag = new Date().getTime();
+
+                var verschil = aftelDatum - vandaag;
+
+                var days = Math.floor(verschil / (1000 * 60 * 60 * 24));
+                var hours = Math.floor((verschil % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                var minutes = Math.floor((verschil % (1000 * 60 * 60)) / (1000 * 60));
+
+                document.getElementById("aankomstTijd").innerHTML = days + "d " + hours + "h " + minutes + "m ";
+
+            }, 1000);
+
+            Chart.defaults.global.defaultFontFamily= 'Montserrat';
+            Chart.defaults.global.defaultFontSize= 16;
+            Chart.defaults.global.defaultFontColor = 'white';
+            
+            var afstandTotMars = document.getElementById('afstandTotMars').getContext('2d');
+            
+            var afstandGrafiek = new Chart(afstandTotMars, {
+                
+                responsive: true,
+                
+                type:'line',
+                data:{
+                    labels:['Dag 1','Dag 2','Dag 3','Dag 4','Dag 5'],
+                    datasets:[{
+                        label:'Afstand',
+                        data: [400000000,375000000,325000000,300000000,250000000],
+                        
+                        backgroundColor:'#ff6361',
+                    }]
+                },
+                options:{
+                    title:{
+                        display: true,
+                        text: "Afstand tot Mars (KM)",
+                    },
+                    legend:{
+                        display: false,
+                    },
+                    scales: {
+                        yAxes: [{
+                            ticks: {
+                                beginAtZero: true,
+                            }
+                        }]
+                    },
+                    elements: {
+                        point:{
+                            radius: 0
+                        }
+                    }
+                    
+                } 
+            
+            });
+            
+            var brandstofPerDag = document.getElementById('brandstofPerDag').getContext('2d');
+            
+            var brandstofGrafiek = new Chart(brandstofPerDag, {
+                
+                responsive: true,
+                
+                type:'bar',
+                data:{
+                    labels:['Dag 1', 'Dag 2', 'Dag 3', 'Dag 4', 'Dag 5'],
+                    datasets:[{
+                        label:'Brandstof',
+                        data: [5000,3000,2000,4000,2500],
+                        
+                        backgroundColor:'#ff7c43',
+                        
+                    }]
+                },
+                options: {
+                    title:{
+                        display: true,
+                        text: "Brandstof Gebruik per dag (L)",
+                    },
+                    legend:{
+                        display: false,
+                    },
+                    scales: {
+                        yAxes: [{
+                            ticks: {
+                                beginAtZero: true,
+                            }
+                        }]
+                    },
+                    
+                    
+                }
+                
+            });
+            
+            var zwaartekrachtZonnenstelsel = document.getElementById('zwaartekrachtZonnenstelsel').getContext('2d');
+            
+            var zwaartekrachtGrafiek = new Chart(zwaartekrachtZonnenstelsel, {
+                
+                responsive: true,
+                
+                type:'bar',
+                data:{
+                    labels:['Aarde', 'Mars', 'Maan', 'Jupiter', 'Uranus'],
+                    datasets:[{
+                        label:'Zwaartekracht',
+                        data: [9.8,3.7,1.6,24.8,8.7],
+                        
+                        backgroundColor:'#d45087',
+                        
+                    }]
+                },
+                options: {
+                    title:{
+                        display: true,
+                        text: "Zwaartekracht lokaal (M/S)",
+                    },
+                    legend:{
+                        display: false,
+                    },
+                    scales: {
+                        yAxes: [{
+                            ticks: {
+                                beginAtZero: true,
+                            }
+                        }]
+                    },
+                    
+                    
+                }
+                
+            });
+            
+            var voedselAanBoord = document.getElementById('voedselAanBoord').getContext('2d');
+            
+            var voedselGrafiek = new Chart(voedselAanBoord, {
+                
+                responsive: true,
+                
+                type:'pie',
+                data:{
+                    labels:['Groente en Fruit','Zuivel','Brood','Dranken','Vetten'],
+                    datasets:[{
+                        label:'Voedsel',
+                        data: [400,200,350,500,75],
+                        
+                        backgroundColor:['#665191','#a05195','#d45087','#f95d6a','#ff7c43'],
+                    
+                    }]
+                },
+                options:{
+                    title:{
+                        display: true,
+                        text: "Voedselvooraad (KG)",
+                    },
+                    legend:{
+                        display: true,
+                        position: 'right',
+                    }
+
+                }  
+            
+            });
+            
+            
+        </script>
+        
+        
+    </body>
+</html>
